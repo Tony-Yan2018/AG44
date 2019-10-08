@@ -18,7 +18,8 @@ class Graph
 
         Graph(int nbNodes);
         virtual ~Graph();
-        void afficher();
+        void display(bool typeOfGraph,bool typeOfRepresentation);
+        void displayMatrix();
 
     protected:
 
