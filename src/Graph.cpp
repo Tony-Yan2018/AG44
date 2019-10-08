@@ -31,37 +31,35 @@ Graph::~Graph()
 {
     //dtor
 }
+
 void Graph::display(bool typeOfGraph,bool typeOfRepresentation){
     ofstream myFeed("Files/Result.txt");//supprime l'ancien fichier ou en créé un nouveau
-
-    if(typeOfGraph){//directed graph
-        cout<<"Type of graph : o"<<endl;
-        myFeed<<"Type of graph : o"<<endl;
-    }else{//undirected graph
-        cout<<"Type of graph : n"<<endl;
-        myFeed<<"Type of graph : n"<<endl;
+    //display the number of vertexes
+    cout<<listVertex.size()<<endl;
+    myFeed<<listVertex.size()<<endl;
+    if(typeOfGraph){//Type of graph : directed graph
+        cout<<"o"<<endl;
+        myFeed<<"o"<<endl;
+    }else{//Type of graph : undirected graph
+        cout<<"n"<<endl;
+        myFeed<<"n"<<endl;
     }
-    if(typeOfRepresentation){//matrix
+    if(typeOfRepresentation){//type of representation : matrix
+        cout<<"m"<<endl;
+        myFeed<<"m"<<endl;
         displayMatrix();
-    }else{//list
-        //displayList();
+    }else{//type of representation : list
+        cout<<"l"<<endl;
+        myFeed<<"l"<<endl;
+        displayList();
     }
-/*
-    cout<<"Liste Vertex : "<<endl;
-    for(int id=0; id<listVertex.size();id++){
-        cout<<", "<<listVertex[id]->id<<endl;
-    }
-    cout<<"Liste Edges : "<<endl;
-    for(int id=0; id<listEdges.size();id++){
-        cout<<", "<<listEdges[id]->id<<"src : "<< listEdges[id]->source
-        <<"Dest : "<< listEdges[id]->destination <<endl;
-    }*/
 }
 
 void Graph::displayMatrix(){
     int matrix[listVertex.size()][listVertex.size()];
     ofstream myFeed("Files/Result.txt", ios::app);
 
+    //calcul of the matrix
     for(int x=0; x<listVertex.size();x++){
             for(int y=0; y<listVertex.size();y++){
                 matrix[x][y]=0;
@@ -72,20 +70,10 @@ void Graph::displayMatrix(){
     }
     if(myFeed){
         //display
-        cout<<" ";
-        myFeed<<" ";
-        for(int i=0; i<listVertex.size();i++){//1st of the tab to display " 123.."
-            cout<<listVertex[i]->id+1;
-            myFeed<<listVertex[i]->id+1;
-        }
-        myFeed<<endl;
-        cout<<endl;
         for(int x=0; x<listVertex.size();x++){
-                myFeed<<x+1;
-                cout<<x+1;
                 for(int y=0; y<listVertex.size();y++){
-                    myFeed<<matrix[x][y];
-                    cout<<matrix[x][y];
+                    myFeed<<matrix[x][y]<<";";
+                    cout<<matrix[x][y]<<";";
                 }
                 myFeed<<endl;
                 cout<<endl;
@@ -95,3 +83,13 @@ void Graph::displayMatrix(){
     }
 }
 
+void Graph::displayList(){
+
+}
+
+void Graph::learnTxtFile(){
+
+}
+
+/* a faire :
+globaliser la matrice à graph et faire une fct qui lit correctement le fichier .txt dans part1 2.bfile error*/

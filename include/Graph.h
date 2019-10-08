@@ -20,6 +20,8 @@ class Graph
         virtual ~Graph();
         void display(bool typeOfGraph,bool typeOfRepresentation);
         void displayMatrix();
+        void displayList();
+        void learnTxtFile();
 
     protected:
 
