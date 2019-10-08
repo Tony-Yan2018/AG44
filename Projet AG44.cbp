@@ -32,7 +32,15 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Edge.h" />
+		<Unit filename="include/Graph.h" />
+		<Unit filename="include/Heap.h" />
+		<Unit filename="include/Vertex.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Edge.cpp" />
+		<Unit filename="src/Graph.cpp" />
+		<Unit filename="src/Heap.cpp" />
+		<Unit filename="src/Vertex.cpp" />
 		<Extensions>
 			<envvars />
 			<code_completion />
