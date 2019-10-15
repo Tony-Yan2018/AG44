@@ -3,10 +3,12 @@
 #include <Edge.h>
 #include <time.h>
 #include <cstdlib>
+#include <cstddef>
 #include <fstream>
+#include <string>
 using namespace std;
 
-Graph::Graph(int nbNodes)
+Graph::Graph(int nbNodes)//construction of a directed graph with a randomly generated matrix
 {
     srand (time(NULL)+1);
     for(int i=0; i<nbNodes;i++){//initialize all the nodes/Vertexes and give them a color
@@ -14,8 +16,8 @@ Graph::Graph(int nbNodes)
         v->color = 0; //O black & 1 white
         listVertex.push_back(v);
     }
-    int p=0;//index of the listEdge to find an edge
-    for(int i=0; i<nbNodes;i++){//to create the matrice
+    int p=0;//index of the edges
+    for(int i=0; i<nbNodes;i++){//to create the matrix
         for(int j=0; j<nbNodes;j++){
             int index =rand() % 2;//generate an random number between 0,1
             if(index == 1){//if an edge exist
@@ -25,6 +27,27 @@ Graph::Graph(int nbNodes)
             }
         }
     }
+}
+Graph::Graph(ifstream * of){
+    string line,lines[3];
+    //char ch[3];
+    int i=0,Nb_Vertices=0;
+    while(getline(*of,line)){
+        lines[i]=line;
+    }
+    if(line[0]<=line.assign(itoa(0,NULL,10))){
+        printf("invalid vertex number");
+        return;
+        }
+    if(line[1]!="o"||line[1]!="n"){
+        printf("invalid graph type");
+        return;
+        }
+    //else if
+
+
+
+
 }
 
 Graph::~Graph()

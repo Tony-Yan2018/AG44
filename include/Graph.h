@@ -5,19 +5,18 @@
 #include <vector>
 #include <iostream>
 using namespace std;
-
-
 class Graph
 {
     public:
-
         vector <Vertex*> listVertex;
         vector <Edge*> listEdges;
-        int **Cout;
+        ///int **Cout;
+        Vertex *AdjacencyList;
 
 
-        Graph(int nbNodes);
-        virtual ~Graph();
+        Graph(int nbNodes); //constructor of a directed graph with a randomly generated matrix
+        Graph(ifstream *);
+        virtual ~Graph();//destructor
         void display(bool typeOfGraph,bool typeOfRepresentation);
         void displayMatrix();
         void displayList();
