@@ -2,6 +2,7 @@
 #define GRAPH_H
 #include "Vertex.h"
 #include "Edge.h"
+#include "AdjListEdgeNode.h"
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -11,11 +12,16 @@ class Graph
         vector <Vertex*> listVertex;
         vector <Edge*> listEdges;
         ///int **Cout;
-        Vertex *AdjacencyList;
+       /// static Vertex *AdjacencyList;
+        static int **matrix;
 
 
-        Graph(int nbNodes); //constructor of a directed graph with a randomly generated matrix
+        Graph(int nbNodes); //constructor of a directed graph
         Graph(ifstream *);
+        void randGeneMat_directed(const int &);
+        void randGeneMat_undirected(const int &);
+        void randGeneAdjLt_directed(const int &);
+        void randGeneAdjLt_undirected(const int &);
         virtual ~Graph();//destructor
         void display(bool typeOfGraph,bool typeOfRepresentation);
         void displayMatrix();

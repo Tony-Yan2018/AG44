@@ -11,7 +11,7 @@ class Edge
         int cost;
 
 
-        Edge(int Id,Vertex* Src,Vertex* Dest);
+        Edge(int Id,Vertex* Src,Vertex* Dest,int&);
         virtual ~Edge();
 
     protected:

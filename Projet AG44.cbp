@@ -33,10 +33,12 @@
 			<Add option="-fexceptions" />
 			<Add directory="include" />
 		</Compiler>
+		<Unit filename="include/AdjListEdgeNode.h" />
 		<Unit filename="include/Edge.h" />
 		<Unit filename="include/Graph.h" />
 		<Unit filename="include/Heap.h" />
 		<Unit filename="include/Vertex.h" />
+		<Unit filename="src/AdjListEdgeNode.cpp" />
 		<Unit filename="src/Edge.cpp" />
 		<Unit filename="src/Graph.cpp" />
 		<Unit filename="src/Heap.cpp" />

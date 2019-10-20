@@ -3,7 +3,7 @@
 Vertex::Vertex(){
     id=-1;
     color=-1;
-    nextEdge=NULL;
+    nextEdgeNode=NULL;
 }
 Vertex::Vertex(int Id)
 {
