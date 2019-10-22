@@ -2,7 +2,6 @@
 #include "Graph.h"
 #include <fstream>
 #include <cstdio>
-#include <windows.h>
 #include <cstddef>
 using namespace std;
 
@@ -11,7 +10,8 @@ int main()
     bool typeOfGraph=true,typeOfRepresentation=false;//true = directed false = undirected | true=matrix false = list
     //Graph g;
     Graph *g = new Graph(5);
-    g->display(typeOfGraph,typeOfRepresentation);
+    //g->display(typeOfGraph,typeOfRepresentation);
+    g->displayList();
     return 0;
 //    if(MessageBox(NULL,"Do you want t"))
 //    ifstream read_file;

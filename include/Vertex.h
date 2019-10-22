@@ -1,15 +1,21 @@
 #ifndef VERTEX_H
 #define VERTEX_H
-//#include"AdjListEdgeNode.h"
+#include <utility>
+#include <vector>
+#include <iostream>
+
 //class AdjListEdgeNode;//avoid cycling include
-#include "AdjListEdgeNode.h"
+
+
+using namespace std;
+
 class Vertex
 {
     public:
         int id;
         int color;
        /// int * neighbours;
-       AdjListEdgeNode *nextEdgeNode;
+       vector <pair<int,int> > nextEdgeNode; /// (id dest, id edge)
 
         Vertex();
         Vertex(int Id);
