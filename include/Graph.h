@@ -18,8 +18,7 @@ class Graph
        /// static Vertex *AdjacencyList;
         int **matrices;
 
-
-        Graph(int nbNodes); //constructor of a directed graph
+        Graph(int _nbNodes,bool typeOfGraph,bool typeOfRepresentation); //constructor of a directed graph
         Graph(ifstream *);
         void randGeneMat_directed();
         void randGeneMat_undirected();
