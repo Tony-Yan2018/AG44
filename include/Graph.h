@@ -19,6 +19,7 @@ class Graph
         int **matrices;
 
         Graph(int _nbNodes,bool typeOfGraph,bool typeOfRepresentation); //constructor of a directed graph
+        Graph();
         Graph(ifstream *);
         void randGeneMat_directed();
         void randGeneMat_undirected();

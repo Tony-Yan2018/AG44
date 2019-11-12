@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <fstream>
 #include <string>
+#include <regex>
+#include <iostream>
 using namespace std;
 
 void Graph::randGeneMat_directed(){
@@ -115,7 +117,6 @@ void Graph::randGeneAdjLt_undirected(){
 
 Graph::Graph(int _nbNodes,bool typeOfGraph,bool typeOfRepresentation)//construction of a directed graph with a randomly generated matrices
 {
-
     this->nbNodes = _nbNodes;
 
     matrices=new int*[nbNodes];
@@ -139,6 +140,39 @@ Graph::Graph(int _nbNodes,bool typeOfGraph,bool typeOfRepresentation)//construct
         displayList();
     }
 }
+Graph::Graph(){//constructor with an input file
+    ifstream myFeed("Files/Result.txt");
+    bool typeOfGraph,typeOfRepresentation;
+    if(myFeed){
+        string s_nbNode,s_typeOfGraph,s_typeOfRepresentation;
+
+        regex pattern_nbNode {"^[0-9]{1,2}"};
+        regex pattern_typeOfGraph {"^[o,n]"};
+        regex pattern_typeOfRepresentation {"^[m,l]"};
+
+        getline(myFeed,s_nbNode);
+        getline(myFeed,s_typeOfGraph);
+        getline(myFeed,s_typeOfRepresentation);
+
+        if(regex_match(s_nbNode,pattern_nbNode)){nbNodes = stoi(s_nbNode,nullptr,10);}
+        else{cout<<"ERROR WRONG NBNODES INPUT";}
+
+        if(regex_match(s_typeOfGraph,pattern_typeOfGraph)){
+            if(s_typeOfGraph=="o"){typeOfGraph=true;}
+            else{typeOfGraph=false;}
+        }
+        else{cout<<"ERROR WRONG TYPE OF GRAPH INPUT";}
+
+        if(regex_match(s_typeOfRepresentation,pattern_typeOfRepresentation)){
+            if(s_typeOfRepresentation=="m"){typeOfRepresentation=true;}
+            else{typeOfRepresentation=false;}
+        }
+        else{cout<<"ERROR WRONG TYPE OF REPRESENTATION INPUT";}
+
+        cout<<"NBNODES "<<nbNodes<<endl<<"TYPEOFGRAPH "<<typeOfGraph<<endl<<"TYPEOFREPRESENTATION "<<typeOfRepresentation;
+    }else {printf("Erreur lecture");}
+}
+
 Graph::~Graph()
 {
     for(unsigned int i=0;i<listVertex.size();i++)
