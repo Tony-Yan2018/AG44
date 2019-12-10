@@ -15,7 +15,7 @@ class Graph
         vector <Edge*> listEdges;
         int nbNodes;
         int **matrices;
-		bool IsThereACycle;//default is false,which means no cycle
+		bool typeOfGraph, typeOfRepresentation;//true = directed false = undirected | true=matrix false = list
 
         Graph(int _nbNodes,bool typeOfGraph,bool typeOfRepresentation); //constructor of a directed graph
         Graph();
@@ -38,7 +38,6 @@ class Graph
 		void BFSListN(int startFrom = -1);
 		void DFSListO(int startFrom = -1);
 		void DFSListN(int startFrom = -1);
-		bool IsCyclicDFSList(int startFrom,int init);
 		bool TopoSortList(int );
 
     protected:

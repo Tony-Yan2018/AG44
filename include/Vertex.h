@@ -13,8 +13,7 @@ class Vertex
 {
     public:
         int id, date, pred;
-        int color;
-       /// int * neighbours;
+        int color;//O black(unvisited) & 1 white(visited) & 2 gray(customized)
        vector <pair<int,int> > nextEdgeNode; /// (id dest, id edge)
 
         Vertex();

@@ -166,10 +166,11 @@ void Graph::randGeneAdjLt_undirected(){
         }
     }
 }
-Graph::Graph(int _nbNodes,bool typeOfGraph,bool typeOfRepresentation)//construction of a directed graph with a randomly generated matrices
+Graph::Graph(int _nbNodes,bool tOG,bool tOR)//construction of a directed graph with a randomly generated matrices
 {
     this->nbNodes = _nbNodes;
-
+	typeOfGraph = tOG;
+	typeOfRepresentation = tOR;
     matrices=new int*[nbNodes];
     for(int i=0;i<nbNodes;i++){
         matrices[i]=new int[nbNodes];
@@ -192,9 +193,8 @@ Graph::Graph(int _nbNodes,bool typeOfGraph,bool typeOfRepresentation)//construct
     }
 }
 Graph::Graph(){//constructor with an input file
-    ifstream myFeed("Files/Input.txt");
-    bool typeOfGraph,typeOfRepresentation;
-	IsThereACycle = false;
+    ifstream myFeed("Files/Input1.txt");
+   // bool typeOfGraph,typeOfRepresentation;
     if(myFeed){
         string s_nbNode,s_typeOfGraph,s_typeOfRepresentation;
 
@@ -222,25 +222,26 @@ Graph::Graph(){//constructor with an input file
             else{typeOfRepresentation=false;}
         }
         else{cout<<"ERROR WRONG TYPE OF REPRESENTATION INPUT"<<endl;}
-		cout << "type rep:" << typeOfRepresentation << endl;
+		
         //cout<<"NBNODES "<<nbNodes<<endl<<"TYPEOFGRAPH "<<s_typeOfGraph<<endl<<"TYPEOFREPRESENTATION "<<s_typeOfRepresentation<<endl;
 		
-       // InputListGene(typeOfGraph,nbNodes,myFeed);
+       // 
 
-    }else {printf("Erreur lecture");}
-	matrices = new int* [nbNodes];
-	for (int i = 0; i < nbNodes; i++) {//to initialise the matrice
-		matrices[i] = new int[nbNodes];
+    }
+	else {
+		printf("Erreur lecture");
 	}
+	if (typeOfRepresentation) {//matrix
+		matrices = new int* [nbNodes];
+		for (int i = 0; i < nbNodes; i++) {//to initialise the matrice
+			matrices[i] = new int[nbNodes];
+		}
 
-	for (int i = 0; i < nbNodes; i++) {//initialize all the nodes/Vertexes and give them a color
-		Vertex* v = new Vertex(i);// to initialize
-		v->color = -1; //O black & 1 white
-		listVertex.push_back(v);
-	}
-
-	if (typeOfRepresentation) {
-
+		for (int i = 0; i < nbNodes; i++) {//initialize all the nodes/Vertexes and give them a color
+			Vertex* v = new Vertex(i);// to initialize
+			v->color = -1; //O black & 1 white
+			listVertex.push_back(v);
+		}
 		learnMatrixTxtFile();
 
 		int p = 0;//index of the edges
@@ -254,14 +255,14 @@ Graph::Graph(){//constructor with an input file
 				}
 			}
 		}
-
+		cout << "BILAN" << endl;
+		displayMatrix();
 	}
-	else {
-		//learnListTxtFile();
+	else {//list
+		InputListGene(typeOfGraph, nbNodes, myFeed);
 	}
 
-	cout << "BILAN" << endl;
-	displayMatrix();
+	
 }
 
 Graph::~Graph(){
@@ -609,52 +610,41 @@ void Graph::DFSListN(int startFrom) {
 		}
 	}
 }
-bool Graph::IsCyclicDFSList(int startFrom,int init) {
-	cout << "Recursive DFS to test cycle:" << endl;
-	Vertex* tempV;
-	tempV = listVertex[startFrom - 1];//designated
 	
-		tempV->color = 1;//O black(unvisited) & 1 white(visited)
-		for (auto it = tempV->nextEdgeNode.begin(); it != tempV->nextEdgeNode.end(); it++) {
-			if (listVertex[(*it).first - 1]->color == 0) {
-				IsCyclicDFSList((*it).first,init);
-			}
-			else
-			{
-				if (tempV->id == (init - 1)) {
-					cout << "detected point:" << tempV->id + 1 << endl;
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-		
 
 bool Graph::TopoSortList(int nbNodes) {
+	/*this algoritm runs without changing the original graph data*/
+	cout << "Topological sort started:" << endl;
 	stack<Vertex *> zeroDegree;
-	int* InDegree= new int[nbNodes];
-	memset(InDegree,0,sizeof(InDegree));
+	int* InDegree= new int[nbNodes];//sizeof(InDegree)=sizeof(int) =4 bytes
+	int count = 0; //to verify if there is a cycle
+	memset(InDegree, 0, sizeof(InDegree) *nbNodes);
 	for (auto it = listEdges.begin(); it != listEdges.end(); it++) {
 		InDegree[(*it)->destination->id]++;
 	}//initialization of the indegree array
 	for (auto it = 0; it < nbNodes; it++) {
 		if (InDegree[it] == 0) {
-			zeroDegree.push(listVertex[it]);
-			InDegree[it] == -1;
+			zeroDegree.push(listVertex[it]);//initialization of zeroDegree stack
+			InDegree[it] == -1;//delete it from the array
 		}
 	}
 	while (!zeroDegree.empty()) {
 		Vertex* temp = zeroDegree.top();
 		cout << "Vertex:" << temp->id + 1 << endl;
+		count++;
 		for (auto it = listEdges.begin(); it != listEdges.end(); it++) {
 			if ((*it)->source->id == temp->id) {
-				InDegree[(*it)->destination->id]--;
+				InDegree[(*it)->source->id] = -1;//abandon current vertex because it's been output
+				InDegree[(*it)->destination->id]--;//update indegree information on out degree vertex
 			}
 		}
 		zeroDegree.pop();
 		if (zeroDegree.empty()) {
+			if (count == listVertex.size()) {// to ensure the last vertex is output only once
+				delete[] InDegree;
+				cout << "Topological sort finished! " << endl;
+				return true;
+			}
 			for (auto it = 0; it < nbNodes; it++) {
 				if (InDegree[it] == 0) {
 					zeroDegree.push(listVertex[it]);
@@ -663,15 +653,14 @@ bool Graph::TopoSortList(int nbNodes) {
 			}
 		}
 	}
-	for (auto it = 0; it < nbNodes; it++) {
-		if (InDegree[it]> 0) {
-			return false;
-		}
+	if (count < listVertex.size()) {// to detect cycle
+		cout << "There is a cycle! Exiting...... " << endl;
+		delete[] InDegree;
+		return false;
 	}
 
 	
 
-	delete[] InDegree;
-	return true;
+	
 
 }

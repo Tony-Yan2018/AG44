@@ -8,14 +8,15 @@ using namespace std;
 
 int main()
 {
-    bool txtOrRandom=true,typeOfGraph=true,typeOfRepresentation=true;//true = directed false = undirected | true=matrix false = list
-    //Graph *g = new Graph(5,typeOfGraph,typeOfRepresentation);
+	bool txtOrRandom = true;//generate a graph from: true£ºtxt; false: random
+	bool typeOfGraph = true;// true = directed false = undirected
+	bool typeOfRepresentation = true;// true=matrix false = list
 	Graph* g;
 	if (txtOrRandom) { g = new Graph(); }
 	//constructor with a random generated matrice
 	else { g = new Graph(5, typeOfGraph, typeOfRepresentation); }
-	g->displayGraph();
-	Depth_first_search DFS(g);
+	//g->displayGraph();
+	//Depth_first_search DFS(g);
 	//g->n_list2matrix();
 	//g->displayMatrix();
 	//g->BFSListN();
@@ -36,6 +37,6 @@ int main()
 	//if (!g->IsThereACycle) {
 	//	g->TopoSortList();
 	//}
-	//g->TopoSortList(g->nbNodes);
+	g->TopoSortList(g->nbNodes);
     return 0;
 }
