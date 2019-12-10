@@ -79,53 +79,56 @@
 	<cstdio>
 	<cstddef>
 
-1571178076 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\edge.cpp
+1571174476 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\edge.cpp
 	"Edge.h"
 
-1571178076 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\edge.h
+1571174476 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\edge.h
 	"Vertex.h"
 
-1571352312 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\vertex.h
-	"AdjListEdgeNode.h"
+1571761380 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\vertex.h
+	<utility>
+	<vector>
+	<iostream>
 
-1571355584 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\graph.cpp
+1574208094 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\graph.cpp
 	"Graph.h"
 	<time.h>
 	<cstdlib>
 	<cstddef>
 	<fstream>
 	<string>
+	<regex>
+	<iostream>
+	<sstream>
 
-1571354677 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\graph.h
+1573765946 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\graph.h
 	"Vertex.h"
 	"Edge.h"
-	"AdjListEdgeNode.h"
 	<vector>
 	<iostream>
 
-1571072103 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\heap.cpp
+1571068503 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\heap.cpp
 	"Heap.h"
 
-1571072103 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\heap.h
+1571068503 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\heap.h
 
-1571352813 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\main.cpp
+1573576740 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\main.cpp
 	<iostream>
 	"Graph.h"
 	<fstream>
 	<cstdio>
-	<windows.h>
 	<cstddef>
 
-1571344074 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\vertex.cpp
+1571761380 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\vertex.cpp
 	"Vertex.h"
 	<cstddef>
 
-1571084523 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\adjlistedgenode.cpp
+1571080923 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\src\adjlistedgenode.cpp
 	"AdjListEdgeNode.h"
 	<cstddef>
 	"Edge.h"
 
-1571352653 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\adjlistedgenode.h
+1571349053 c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\adjlistedgenode.h
 
 1571352653 source:c:\users\think\documents\mes ¨¦tudes en france\automne 2019\ag44\tp\projectfiles\include\adjlistedgenode.h
 

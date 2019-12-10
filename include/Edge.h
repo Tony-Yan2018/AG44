@@ -14,6 +14,8 @@ class Edge
         Edge(int Id,Vertex* Src,Vertex* Dest,int&);
         virtual ~Edge();
 
+		int getID();
+
     protected:
 
     private:

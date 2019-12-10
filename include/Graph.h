@@ -14,13 +14,12 @@ class Graph
         vector <Vertex*> listVertex;
         vector <Edge*> listEdges;
         int nbNodes;
-        ///int **Cout;
-       /// static Vertex *AdjacencyList;
         int **matrices;
+		bool IsThereACycle;//default is false,which means no cycle
 
         Graph(int _nbNodes,bool typeOfGraph,bool typeOfRepresentation); //constructor of a directed graph
         Graph();
-        Graph(ifstream *);
+        void InputListGene(bool TOG,int nbNodes,ifstream& f);
         void randGeneMat_directed();
         void randGeneMat_undirected();
         void randGeneAdjLt_directed();
@@ -29,8 +28,18 @@ class Graph
         void display(bool,bool);
         void displayMatrix();
         void displayList();
-        void learnTxtFile();
         Edge* findEdge(int);
+		void displayGraph();
+		void learnMatrixTxtFile();
+		void learnListTxtFile();
+		void o_list2matrix();
+		void n_list2matrix();
+		void BFSListO(int startFrom =-1);
+		void BFSListN(int startFrom = -1);
+		void DFSListO(int startFrom = -1);
+		void DFSListN(int startFrom = -1);
+		bool IsCyclicDFSList(int startFrom,int init);
+		bool TopoSortList(int );
 
     protected:
 

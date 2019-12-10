@@ -12,3 +12,6 @@ Edge::~Edge()
 {
     //dtor
 }
+int Edge::getID() {
+	return id;
+}

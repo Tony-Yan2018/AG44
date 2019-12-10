@@ -12,7 +12,7 @@ using namespace std;
 class Vertex
 {
     public:
-        int id;
+        int id, date, pred;
         int color;
        /// int * neighbours;
        vector <pair<int,int> > nextEdgeNode; /// (id dest, id edge)
