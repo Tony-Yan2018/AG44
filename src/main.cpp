@@ -21,22 +21,7 @@ int main()
 	//g->displayMatrix();
 	//g->BFSListN();
 	//g->DFSListN();
-	/*for (auto it = 0; it != g->listVertex.size(); it++) {
-		cout << "start point:" << it + 1 << endl;
-		if (g->IsCyclicDFSList(it + 1, it + 1)) {
-			cout << "cycle detected!" << endl;
-			g->IsThereACycle = true;
-			break;
-		}
-		else {
-			for (auto it = g->listVertex.begin(); it != g->listVertex.end(); it++) {
-				(*it)->color = 0;
-			}
-		}
-	}*/
-	//if (!g->IsThereACycle) {
-	//	g->TopoSortList();
-	//}
-	g->TopoSortList(g->nbNodes);
+	//g->TopoSortList(g->nbNodes);
+	g->DijkstraList(g->listVertex[6]);
     return 0;
 }

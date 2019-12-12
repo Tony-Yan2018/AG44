@@ -39,6 +39,7 @@ class Graph
 		void DFSListO(int startFrom = -1);
 		void DFSListN(int startFrom = -1);
 		bool TopoSortList(int );
+		void DijkstraList(Vertex *);
 
     protected:
 

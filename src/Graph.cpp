@@ -9,6 +9,7 @@
 #include <sstream>
 #include <queue>
 #include <stack>
+#define INFINITE 0x3f//for Dijkstra (1061109567 in int)
 using namespace std;
 void Graph::InputListGene(bool TOG,int nbNodes,ifstream& f){
     string* line = new string[nbNodes];
@@ -610,8 +611,6 @@ void Graph::DFSListN(int startFrom) {
 		}
 	}
 }
-	
-
 bool Graph::TopoSortList(int nbNodes) {
 	/*this algoritm runs without changing the original graph data*/
 	cout << "Topological sort started:" << endl;
@@ -625,7 +624,7 @@ bool Graph::TopoSortList(int nbNodes) {
 	for (auto it = 0; it < nbNodes; it++) {
 		if (InDegree[it] == 0) {
 			zeroDegree.push(listVertex[it]);//initialization of zeroDegree stack
-			InDegree[it] == -1;//delete it from the array
+			InDegree[it] = -1;//delete it from the array
 		}
 	}
 	while (!zeroDegree.empty()) {
@@ -648,7 +647,7 @@ bool Graph::TopoSortList(int nbNodes) {
 			for (auto it = 0; it < nbNodes; it++) {
 				if (InDegree[it] == 0) {
 					zeroDegree.push(listVertex[it]);
-					InDegree[it] == -1;
+					InDegree[it] = -1;
 				}
 			}
 		}
@@ -658,9 +657,58 @@ bool Graph::TopoSortList(int nbNodes) {
 		delete[] InDegree;
 		return false;
 	}
+}
+void Graph::DijkstraList(Vertex* v) {
+	/*
+		O black(not been calculated,Set U) & 1 white(calculated,Set S )
+	*/
+	cout <<endl<< "Dijkstra starts from Vertex " <<v->id+1<<": "<< endl;
+	/*Initialization of distance[]*/
+	int* distance = new int[listVertex.size()];
+	memset(distance,INFINITE,sizeof(distance)*listVertex.size());//INFINITE means the vertex is not directly connected to vertex v
+	v->color = 1;
+	distance[v->id] = 0;
+	for (auto it = v->nextEdgeNode.begin(); it != v->nextEdgeNode.end(); it++) {
+		distance[it->first-1] = findEdge(it->second)->cost;
+	}
 
+	while (1) {
+		/*to test break condition*/
+		int count = 0;
+		for (auto it = listVertex.begin(); it != listVertex.end(); it++) {
+			if ((*it)->color == 1)
+				count++;
+		}
+		if (count == listVertex.size())
+			break;
+		/*to localize the minimum non zero value in distance[]*/
+		int minVal = distance[0], minValNum = 0;
+		while (minVal == 0|| listVertex[minValNum]->color == 1) {
+			minValNum++;
+			minVal = distance[minValNum];
+		}
+		for (int i = minValNum + 1; i < listVertex.size(); i++) {
+			if ((distance[i] != 0) && (distance[i] < minVal) && (listVertex[i]->color !=1))
+			{
+				minVal = distance[i];
+				minValNum = i;
+			}
+			else
+				continue;
+		}
+		Vertex* temp = listVertex[minValNum];
+		for (auto it = temp->nextEdgeNode.begin(); it != temp->nextEdgeNode.end(); it++) {
+			if (distance[it->first - 1] > findEdge(it->second)->cost + minVal)//RELAX operation
+				distance[it->first - 1] = findEdge(it->second)->cost + minVal;
+		}
+		temp->color = 1;//1=white=calculated
+		
+	}
+	for (auto it = 0; it < listVertex.size(); it++) {
+		if(distance[it]== 1061109567)
+			cout << "Shortest path value to Vertex " << it + 1 << " is: UNREACHABLE" << endl;
+		else
+			cout << "Shortest path value to Vertex " << it + 1 << " is: " << distance[it] << endl;
+	}
 	
-
-	
-
 }
