@@ -40,6 +40,7 @@ class Graph
 		void DFSListN(int startFrom = -1);
 		bool TopoSortList(int );
 		void DijkstraList(Vertex *);
+		void StronglyConnectedComp(int nbNodes,int startFrom = -1);
 
     protected:
 

@@ -22,6 +22,7 @@ int main()
 	//g->BFSListN();
 	//g->DFSListN();
 	//g->TopoSortList(g->nbNodes);
-	g->DijkstraList(g->listVertex[6]);
+	//g->DijkstraList(g->listVertex[6]);
+	g->StronglyConnectedComp(g->nbNodes,1);
     return 0;
 }

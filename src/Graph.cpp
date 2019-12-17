@@ -9,7 +9,7 @@
 #include <sstream>
 #include <queue>
 #include <stack>
-#define INFINITE 0x3f//for Dijkstra (1061109567 in int)
+#define INFINITE 0x3f//for Dijkstra (1061109567 in int for 4 bytes)
 using namespace std;
 void Graph::InputListGene(bool TOG,int nbNodes,ifstream& f){
     string* line = new string[nbNodes];
@@ -194,7 +194,7 @@ Graph::Graph(int _nbNodes,bool tOG,bool tOR)//construction of a directed graph w
     }
 }
 Graph::Graph(){//constructor with an input file
-    ifstream myFeed("Files/Input1.txt");
+    ifstream myFeed("Files/strong.txt");
    // bool typeOfGraph,typeOfRepresentation;
     if(myFeed){
         string s_nbNode,s_typeOfGraph,s_typeOfRepresentation;
@@ -705,10 +705,127 @@ void Graph::DijkstraList(Vertex* v) {
 		
 	}
 	for (auto it = 0; it < listVertex.size(); it++) {
-		if(distance[it]== 1061109567)
+		if(distance[it]== 1061109567) // (= 0x3f3f3f3f)
 			cout << "Shortest path value to Vertex " << it + 1 << " is: UNREACHABLE" << endl;
 		else
 			cout << "Shortest path value to Vertex " << it + 1 << " is: " << distance[it] << endl;
 	}
 	
+}
+int MaxIndex(int* v, int size) {
+	int max = v[0];
+	int i = 0;
+	for (auto it = 1; it < size; it++) {
+		if (v[it] > max) {
+			max = v[it];
+			i = it;
+		}
+
+	}
+	return i;
+}
+void Graph::StronglyConnectedComp(int nbNodes,int startFrom) {
+	cout << "Detecting strongly connected components: " << endl;
+	/*choose a vertex randomly or designate with parameter*/
+	srand((unsigned int)time(NULL));
+	Vertex* tempV;
+	if (startFrom == -1) {
+		int sze = listVertex.size();
+		int rdm = rand() % sze;//[0,sze)
+		tempV = listVertex[rdm];
+	}
+	else
+		tempV = listVertex[startFrom - 1];
+	int count = 0;// to check if all vertices have been visited
+	int* mark = new int[nbNodes];// to store the numbers marked on vertex
+	stack<Vertex* > myStack;// to assist dfs algo
+	myStack.push(tempV);//initialization
+	/*DFS algo to mark the vertices from leaves*/
+	while (!myStack.empty()) {
+		cout << "colored:" << myStack.top()->id << endl;
+		myStack.top()->color = 1;// visit the vertex on top
+		int visited = 0;// to check if all adjacent vertices have been visited
+		
+		for (auto it = myStack.top()->nextEdgeNode.begin(); it != myStack.top()->nextEdgeNode.end(); it++) {
+			if (listVertex[it->first - 1]->color == 0)//O black(unvisited) & 1 white(visited))
+			{
+				myStack.push(listVertex[it->first - 1]);
+				break;
+			}
+			else
+				visited++;
+		}
+		/*if the vertex and all its adjacent vertices have been visited, 
+		which means the end of DFS, then mark it and pop it out*/
+		if (visited == myStack.top()->nextEdgeNode.size() && myStack.top()->color == 1) {
+			cout << "mark:" << myStack.top()->id<<endl;
+			count++;
+			mark[myStack.top()->id] = count;// mark the vertex
+			myStack.pop();
+		}
+		/*check if all vertices in graph have been visited*/
+		if (myStack.empty() && count < nbNodes) {
+			for (auto it = listVertex.begin(); it != listVertex.end(); it++) {
+				if ((*it)->color == 0) {//O black(unvisited) & 1 white(visited)
+					myStack.push(*it);
+					break;
+				}	
+			}
+		}
+	}
+	/*end of DFS and the marking procedure*/
+	/*restore the visit flag*/
+	for (auto it = listVertex.begin(); it != listVertex.end(); it++) {
+		(*it)->color = 0;//O black(unvisited) & 1 white(visited)
+	}
+
+	for (auto it = 0; it < nbNodes; it++)
+		cout << "it:" << it << "number:" << mark[it] << endl;
+	/*begin to reverse the edges with no change of original data*/
+	vector<int>* tempAdjList = new vector<int>[nbNodes];//temporary assisting structure
+	int max = MaxIndex(mark,nbNodes);
+	cout << "maxindex:" << max << endl;
+	for (auto it = listEdges.begin(); it != listEdges.end(); it++) {
+		Vertex* temp;
+		temp = (*it)->destination;
+		(*it)->destination = (*it)->source;
+		(*it)->source = temp;
+		//store the just reversed data
+		tempAdjList[(*it)->source->id].push_back((*it)->destination->id);
+	}
+	myStack.push(listVertex[max]);//initialization
+	mark[max] = 0;
+	int component = 0;
+	int pushchecker = 1;
+	while (!myStack.empty()) {
+		if (myStack.top()->color == 0) {
+			cout << "This is strongly connected component " << component+1 << "." << endl;
+			myStack.top()->color = 1;//O black(unvisited) & 1 white(visited)
+			mark[myStack.top()->id] = 0;//exclude visited vertex
+			cout << "Vertex: " << myStack.top()->id + 1 << endl;
+		}
+		int popchecker = 0;
+		for (auto it = tempAdjList[myStack.top()->id].begin(); it != tempAdjList[myStack.top()->id].end(); it++) {
+			if (listVertex[*it]->color == 0) {//O black(unvisited) & 1 white(visited)
+				myStack.push(listVertex[*it]);
+				pushchecker++;
+				break;
+			}
+			else
+				popchecker++;
+		}
+		if (popchecker == tempAdjList[myStack.top()->id].size() && myStack.top()->color == 1)//O black(unvisited) & 1 white(visited)
+		{// end of the road, pop 
+			myStack.pop();
+		}
+		/*if the current component is all visited and not all vertices in graph are visited,
+		then add the vertex with the biggest number marked into stack*/
+		if (myStack.empty() && pushchecker < nbNodes) {
+			myStack.push(listVertex[MaxIndex(mark,nbNodes)]);
+			pushchecker++;
+			component++;
+		}
+	}
+
+	delete[] mark;
 }
