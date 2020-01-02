@@ -41,6 +41,7 @@ class Graph
 		bool TopoSortList(int );
 		void DijkstraList(Vertex *);
 		void StronglyConnectedComp(int nbNodes,int startFrom = -1);
+		void KruskalList();
 
     protected:
 

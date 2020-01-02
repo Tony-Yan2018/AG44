@@ -1,4 +1,6 @@
 #include <Graph.h>
+#include <Heap.h>
+#include <Disjoint_Set_Union.h>
 #include <time.h>
 #include <cstdlib>
 #include <cstddef>
@@ -194,7 +196,7 @@ Graph::Graph(int _nbNodes,bool tOG,bool tOR)//construction of a directed graph w
     }
 }
 Graph::Graph(){//constructor with an input file
-    ifstream myFeed("Files/strong.txt");
+    ifstream myFeed("Files/Input1.txt");
    // bool typeOfGraph,typeOfRepresentation;
     if(myFeed){
         string s_nbNode,s_typeOfGraph,s_typeOfRepresentation;
@@ -223,11 +225,6 @@ Graph::Graph(){//constructor with an input file
             else{typeOfRepresentation=false;}
         }
         else{cout<<"ERROR WRONG TYPE OF REPRESENTATION INPUT"<<endl;}
-		
-        //cout<<"NBNODES "<<nbNodes<<endl<<"TYPEOFGRAPH "<<s_typeOfGraph<<endl<<"TYPEOFREPRESENTATION "<<s_typeOfRepresentation<<endl;
-		
-       // 
-
     }
 	else {
 		printf("Erreur lecture");
@@ -477,11 +474,13 @@ void Graph::BFSListO(int startFrom) {
 	else {//designated choose
 		myQueue.push(listVertex[startFrom-1]);
 	}
+	int countVisitedAll = 0;
 	while (!myQueue.empty()) {// travel through until there is nothing in the queue
 		Vertex* V = myQueue.front();
 		if (V->color == 0) {
 			V->color = 1; //O black(unvisited) & 1 white(visited)//V visited white 1
 			cout << "Vertex visited:" << V->id +1<< endl;
+			countVisitedAll++;
 		}
 		if (!V->nextEdgeNode.empty()) {//if the out degree is not zero
 			for (auto it = V->nextEdgeNode.begin(); it != V->nextEdgeNode.end(); it++) {//travel through all outgoing vertices
@@ -489,17 +488,14 @@ void Graph::BFSListO(int startFrom) {
 				myQueue.push(listVertex[(*it).first-1]);//push into queue for next round travel
 			}
 		}
-		else {//if the first chosed vertex has zero out degree, then add the first unvisited vertex from list
+		myQueue.pop();
+		if (countVisitedAll != listVertex.size()) {
 			for (auto it = listVertex.begin(); it != listVertex.end(); it++) {
-				if ((*it)->color == 0) {//if unvisited
+				if ((*it)->color == 0)
 					myQueue.push(*it);
-					break;/*ATTENTION without this line the algo will be wrong !
-					because more than one unvisited vertex has been added to queue,
-						which causes a sequential fault*/
-				}
+				break;
 			}
 		}
-		myQueue.pop();
 	}
 }
 void Graph::BFSListN(int startFrom) {
@@ -575,7 +571,7 @@ void Graph::DFSListO(int startFrom) {
 			}
 			if (countVisited == tempV->nextEdgeNode.size()) {
 				myStack.pop();
-			}
+			}//all adjacent vertices of the current vertex have been visited, then pop the current one
 			if (countVisitedAll != listVertex.size() && myStack.empty()) {
 				for (auto it = listVertex.begin(); it != listVertex.end(); it++)
 					if ((*it)->color == 0) {
@@ -615,9 +611,9 @@ bool Graph::TopoSortList(int nbNodes) {
 	/*this algoritm runs without changing the original graph data*/
 	cout << "Topological sort started:" << endl;
 	stack<Vertex *> zeroDegree;
-	int* InDegree= new int[nbNodes];//sizeof(InDegree)=sizeof(int) =4 bytes
+	int* InDegree= new int[nbNodes];// indegree array for all vertices
 	int count = 0; //to verify if there is a cycle
-	memset(InDegree, 0, sizeof(InDegree) *nbNodes);
+	memset(InDegree, 0, sizeof(InDegree) *nbNodes);//sizeof(InDegree) = sizeof(int) =4 bytes
 	for (auto it = listEdges.begin(); it != listEdges.end(); it++) {
 		InDegree[(*it)->destination->id]++;
 	}//initialization of the indegree array
@@ -671,7 +667,7 @@ void Graph::DijkstraList(Vertex* v) {
 	for (auto it = v->nextEdgeNode.begin(); it != v->nextEdgeNode.end(); it++) {
 		distance[it->first-1] = findEdge(it->second)->cost;
 	}
-
+	/*end of initialization*/
 	while (1) {
 		/*to test break condition*/
 		int count = 0;
@@ -681,9 +677,9 @@ void Graph::DijkstraList(Vertex* v) {
 		}
 		if (count == listVertex.size())
 			break;
-		/*to localize the minimum non zero value in distance[]*/
+		/*to find the minimum non zero and not calculated vertex's value in distance[]*/
 		int minVal = distance[0], minValNum = 0;
-		while (minVal == 0|| listVertex[minValNum]->color == 1) {
+		while (minVal == 0|| listVertex[minValNum]->color == 1) {// not source itself, not calculated vertex
 			minValNum++;
 			minVal = distance[minValNum];
 		}
@@ -696,6 +692,7 @@ void Graph::DijkstraList(Vertex* v) {
 			else
 				continue;
 		}
+		/*end find*/
 		Vertex* temp = listVertex[minValNum];
 		for (auto it = temp->nextEdgeNode.begin(); it != temp->nextEdgeNode.end(); it++) {
 			if (distance[it->first - 1] > findEdge(it->second)->cost + minVal)//RELAX operation
@@ -712,7 +709,7 @@ void Graph::DijkstraList(Vertex* v) {
 	}
 	
 }
-int MaxIndex(int* v, int size) {
+int MaxIndex(int* v, int size) {//auxiliary function for strongly connected components
 	int max = v[0];
 	int i = 0;
 	for (auto it = 1; it < size; it++) {
@@ -723,7 +720,7 @@ int MaxIndex(int* v, int size) {
 
 	}
 	return i;
-}
+} 
 void Graph::StronglyConnectedComp(int nbNodes,int startFrom) {
 	cout << "Detecting strongly connected components: " << endl;
 	/*choose a vertex randomly or designate with parameter*/
@@ -742,10 +739,9 @@ void Graph::StronglyConnectedComp(int nbNodes,int startFrom) {
 	myStack.push(tempV);//initialization
 	/*DFS algo to mark the vertices from leaves*/
 	while (!myStack.empty()) {
-		cout << "colored:" << myStack.top()->id << endl;
+		//cout << "colored:" << myStack.top()->id << endl;
 		myStack.top()->color = 1;// visit the vertex on top
 		int visited = 0;// to check if all adjacent vertices have been visited
-		
 		for (auto it = myStack.top()->nextEdgeNode.begin(); it != myStack.top()->nextEdgeNode.end(); it++) {
 			if (listVertex[it->first - 1]->color == 0)//O black(unvisited) & 1 white(visited))
 			{
@@ -758,7 +754,7 @@ void Graph::StronglyConnectedComp(int nbNodes,int startFrom) {
 		/*if the vertex and all its adjacent vertices have been visited, 
 		which means the end of DFS, then mark it and pop it out*/
 		if (visited == myStack.top()->nextEdgeNode.size() && myStack.top()->color == 1) {
-			cout << "mark:" << myStack.top()->id<<endl;
+			//cout << "mark:" << myStack.top()->id<<endl;
 			count++;
 			mark[myStack.top()->id] = count;// mark the vertex
 			myStack.pop();
@@ -778,13 +774,9 @@ void Graph::StronglyConnectedComp(int nbNodes,int startFrom) {
 	for (auto it = listVertex.begin(); it != listVertex.end(); it++) {
 		(*it)->color = 0;//O black(unvisited) & 1 white(visited)
 	}
-
-	for (auto it = 0; it < nbNodes; it++)
-		cout << "it:" << it << "number:" << mark[it] << endl;
 	/*begin to reverse the edges with no change of original data*/
 	vector<int>* tempAdjList = new vector<int>[nbNodes];//temporary assisting structure
 	int max = MaxIndex(mark,nbNodes);
-	cout << "maxindex:" << max << endl;
 	for (auto it = listEdges.begin(); it != listEdges.end(); it++) {
 		Vertex* temp;
 		temp = (*it)->destination;
@@ -793,9 +785,10 @@ void Graph::StronglyConnectedComp(int nbNodes,int startFrom) {
 		//store the just reversed data
 		tempAdjList[(*it)->source->id].push_back((*it)->destination->id);
 	}
+	/*end of reserve procedure*/
 	myStack.push(listVertex[max]);//initialization
 	mark[max] = 0;
-	int component = 0;
+	int component = 0;//component counter
 	int pushchecker = 1;
 	while (!myStack.empty()) {
 		if (myStack.top()->color == 0) {
@@ -826,6 +819,28 @@ void Graph::StronglyConnectedComp(int nbNodes,int startFrom) {
 			component++;
 		}
 	}
-
 	delete[] mark;
+}
+void Graph::KruskalList() {
+	cout << "Kruskal Algorithm starting:" << endl;//no modification of any original data
+	Heap minHeap = Heap(listEdges,listEdges.capacity(),listEdges.size());
+	int* VertKrus = new int[listVertex.size()];
+	for (auto i = 0; i < listVertex.size(); i++) {
+		VertKrus[i] = (listVertex[i]->id);
+	}
+	Disjoint_Set_Union ds = Disjoint_Set_Union(VertKrus,listVertex.size());
+	int count = 0;//number of edges in minimal spanning tree
+	Edge temp;
+	while (count != listVertex.size() - 1) {//the minimal spanning tree is built when they are equal
+		temp = minHeap.GetTop();
+		if (ds.Differ(temp.destination->id, temp.source->id)) {//if in different sets
+			cout << "Edge: " << temp.id << ",Weight: " << temp.cost << ",Connecting vertex " << temp.source->id+1 << ",vertex " << temp.destination->id+1 << endl;
+			ds.Union(temp.destination->id, temp.source->id);
+		}
+		else//if in the same set, skip
+			continue;
+		minHeap.DeleteTop();
+		count++;
+		
+	}
 }

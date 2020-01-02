@@ -19,10 +19,13 @@ int main()
 	//Depth_first_search DFS(g);
 	//g->n_list2matrix();
 	//g->displayMatrix();
+	g->BFSListO();
 	//g->BFSListN();
-	//g->DFSListN();
-	//g->TopoSortList(g->nbNodes);
-	//g->DijkstraList(g->listVertex[6]);
-	g->StronglyConnectedComp(g->nbNodes,1);
+	//g->DFSListO(); //compatible with ./File/Input1.txt
+	//g->DFSListN(); //compatible with ./File/Input2.txt
+	//g->TopoSortList(g->nbNodes); //compatible with ./File/Input1.txt and ./File/Input1.1.txt
+	//g->DijkstraList(g->listVertex[6]); //runs perfectly with ./File/Input1.txt
+	//g->StronglyConnectedComp(g->nbNodes,1); //runs perfectly with ./File/Input1.txt
+	//g->KruskalList(); //runs perfectly with ./File/Input1.txt
     return 0;
 }

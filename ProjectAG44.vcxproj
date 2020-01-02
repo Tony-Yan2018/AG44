@@ -99,6 +99,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Disjoint_Set_Union.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Depth_first_search.cpp" />
     <ClCompile Include="src\Edge.cpp" />
     <ClCompile Include="src\Graph.cpp" />
@@ -107,6 +111,10 @@
     <ClCompile Include="src\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Disjoint_Set_Union.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="include\Depth_first_search.h" />
     <ClInclude Include="include\Edge.h" />
     <ClInclude Include="include\Graph.h" />

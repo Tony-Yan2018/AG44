@@ -3,10 +3,6 @@
 #include <utility>
 #include <vector>
 #include <iostream>
-
-//class AdjListEdgeNode;//avoid cycling include
-
-
 using namespace std;
 
 class Vertex

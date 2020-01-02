@@ -10,11 +10,12 @@ class Edge
         Vertex *destination;
         int cost;
 
-
+		Edge();
         Edge(int Id,Vertex* Src,Vertex* Dest,int&);
         virtual ~Edge();
 
 		int getID();
+		Edge& operator=(const Edge& t);
 
     protected:
 
