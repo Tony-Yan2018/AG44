@@ -8,7 +8,7 @@ using namespace std;
 class Vertex
 {
     public:
-        int id, date, pred;
+        int id, date, pred,dist;
         int color;//O black(unvisited) & 1 white(visited) & 2 gray(customized)
        vector <pair<int,int> > nextEdgeNode; /// (id dest, id edge)
 

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\</FILEPATH>
+      <FILENAME>Depth_first_search.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Depth_first_search::time' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Depth_first_search::{ctor}</FUNCTION>
+    <DECORATED>??0Depth_first_search@@QAE@PAVGraph@@@Z</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Depth_first_search::time</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\</FILEPATH>
+      <FILENAME>Vertex.cpp</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Vertex::color' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Vertex::{ctor}</FUNCTION>
+    <DECORATED>??0Vertex@@QAE@H@Z</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Vertex::color</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT></DEFECTS>

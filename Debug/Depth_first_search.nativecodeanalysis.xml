@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\</FILEPATH>
+      <FILENAME>Depth_first_search.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Depth_first_search::time' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Depth_first_search::{ctor}</FUNCTION>
+    <DECORATED>??0Depth_first_search@@QAE@PAVGraph@@@Z</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Depth_first_search::time</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\</FILEPATH>
+      <FILENAME>Depth_first_search.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Depth_first_search::g' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Depth_first_search::{ctor}</FUNCTION>
+    <DECORATED>??0Depth_first_search@@QAE@PAVGraph@@@Z</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Depth_first_search::g</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

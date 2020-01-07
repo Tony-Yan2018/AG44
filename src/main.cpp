@@ -4,6 +4,10 @@
 #include <cstdio>
 #include <cstddef>
 #include "Depth_first_search.h"
+#include "Breadth_first_search.h"
+#include "Strongly_related.h"
+#include "Prim.h"
+#include "Kruskal.h"
 using namespace std;
 
 int main()
@@ -19,7 +23,7 @@ int main()
 	//Depth_first_search DFS(g);
 	//g->n_list2matrix();
 	//g->displayMatrix();
-	g->BFSListO();
+	//g->BFSListO();
 	//g->BFSListN();
 	//g->DFSListO(); //compatible with ./File/Input1.txt
 	//g->DFSListN(); //compatible with ./File/Input2.txt
@@ -27,5 +31,12 @@ int main()
 	//g->DijkstraList(g->listVertex[6]); //runs perfectly with ./File/Input1.txt
 	//g->StronglyConnectedComp(g->nbNodes,1); //runs perfectly with ./File/Input1.txt
 	//g->KruskalList(); //runs perfectly with ./File/Input1.txt
+
+	//Depth_first_search DFS(g);
+	//Breadth_first_search BFS(g);
+	Kruskal Ksk(g);
+	//Prim prim(g);
+	//Strongly_related Strongly_related(g);
+
     return 0;
 }

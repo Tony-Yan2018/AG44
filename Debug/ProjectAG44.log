@@ -1,20 +1,2 @@
-﻿  Graph.cpp
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(36,1): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(133): message : see declaration of 'strcpy'
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(37,1): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(440): message : see declaration of 'strtok'
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(38,1): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(440): message : see declaration of 'strtok'
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(67,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(97,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(126,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(149,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(363,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(369,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(400,26): warning C4804: '>=': unsafe use of type 'bool' in operation
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(651,12): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(686,33): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(704,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(828,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\src\Graph.cpp(656): warning C4715: 'Graph::TopoSortList': not all control paths return a value
+﻿  main.cpp
   ProjectAG44.vcxproj -> C:\Users\Think\Documents\Mes études en France\Automne 2019\AG44\TP\ProjectFiles\Debug\ProjectAG44.exe

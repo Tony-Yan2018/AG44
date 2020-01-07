@@ -99,6 +99,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Breadth_first_search.cpp" />
     <ClCompile Include="src\Disjoint_Set_Union.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -107,10 +108,14 @@
     <ClCompile Include="src\Edge.cpp" />
     <ClCompile Include="src\Graph.cpp" />
     <ClCompile Include="src\Heap.cpp" />
+    <ClCompile Include="src\Kruskal.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Prim.cpp" />
+    <ClCompile Include="src\Strongly_related.cpp" />
     <ClCompile Include="src\Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Breadth_first_search.h" />
     <ClInclude Include="include\Disjoint_Set_Union.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -119,6 +124,9 @@
     <ClInclude Include="include\Edge.h" />
     <ClInclude Include="include\Graph.h" />
     <ClInclude Include="include\Heap.h" />
+    <ClInclude Include="include\Kruskal.h" />
+    <ClInclude Include="include\Prim.h" />
+    <ClInclude Include="include\Strongly_related.h" />
     <ClInclude Include="include\Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

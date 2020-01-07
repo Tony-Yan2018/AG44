@@ -196,7 +196,7 @@ Graph::Graph(int _nbNodes,bool tOG,bool tOR)//construction of a directed graph w
     }
 }
 Graph::Graph(){//constructor with an input file
-    ifstream myFeed("Files/Input1.txt");
+    ifstream myFeed("Files/Input_Kruskal_Prim.txt");
    // bool typeOfGraph,typeOfRepresentation;
     if(myFeed){
         string s_nbNode,s_typeOfGraph,s_typeOfRepresentation;

@@ -5,6 +5,7 @@ Vertex::Vertex(){
     color=-1;
 	pred = 0;
 	date = 0;
+	dist = 0;
 }
 Vertex::Vertex(int Id)
 {
